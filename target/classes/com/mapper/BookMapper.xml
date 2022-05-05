@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.BookMapper">
+<!--    增加一本书-->
+    <insert id="insertBook" parameterType="books">
+        insert into ssmbuild.books (bookName, ISBN, author, publisher)
+        values ( #{bookName}, #{ISBN}, #{author}, #{publisher});
+    </insert>
+<!--    删除一本书-->
+    <delete id="deleteBookByID" parameterType="int">
+        delete
+        from ssmbuild.books
+        where bookId= #{bookId}
+    </delete>
+<!--    更新一本书   -->
+    <update id="updateBook" parameterType="books">
+        update ssmbuild.books
+        set bookName=#{bookName},ISBN=#{ISBN},author=#{author}
+        where bookId=#{bookId}
+    </update>
+<!--    查询一本书-->
+    <select id="selectBookByID" resultType="books">
+        select *
+        from ssmbuild.books
+        where bookId=#{bookId}
+    </select>
+<!--    模糊查找书-->
+    <select id="selectBooksLike" resultType="books">
+        select *
+        from ssmbuild.books
+        where bookName like concat('%',#{bookName},'%')
+    </select>
+<!--    查询全部书-->
+    <select id="selectAllBooks" resultType="books">
+        select *
+        from ssmbuild.books;
+    </select>
+</mapper>
